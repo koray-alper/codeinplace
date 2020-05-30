@@ -64,6 +64,7 @@ def main():
         # ball bounces off the side walls of the canvas
         if get_left_x(canvas, ball) <= 0 or get_left_x(canvas, ball) >= CANVAS_WIDTH - BALL_SIZE:
             v_x_0 = -1 * v_x_0
+            temp = 0
         # ball bounces up and down as it bumps into paddle canvas x-axis and bricks, and bricks deleted whne hit by wall
         if get_top_y(canvas,ball) <= 0:
             v_y_0 = -1 * v_y_0
@@ -160,6 +161,8 @@ def angles(v_y_0, v_x_0, ball_coords, paddle_coords):
     m = (paddle_center_y - ball_center_y)/ ( ball_center_x - paddle_center_x)
     if  v_x_0 < 0:
         angle_speed = math.degrees(math.atan(v_y_0 / (-1*v_x_0)))
+    elif v_x_0 == 0:
+        angle_speed = 90
     else:
         angle_speed = 180 + math.degrees(math.atan(v_y_0 / (-1*v_x_0)))
     if math.degrees(math.atan(-1 / m)) > 0:
@@ -169,6 +172,7 @@ def angles(v_y_0, v_x_0, ball_coords, paddle_coords):
     angle_dif = angle_plane - angle_speed
     angle_x_axis = 180 + angle_plane + angle_dif
     return angle_x_axis
+
 
 def make_canvas(width, height, title):
     """
